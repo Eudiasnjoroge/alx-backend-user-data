@@ -24,3 +24,12 @@ def stats() -> str:
     stats = {}
     stats['users'] = User.count()
     return jsonify(stats)
+
+
+from flask import jsonify, abort
+from api.v1.views import app_views
+
+@app_views.route('/unauthorized', methods=['GET'], strict_slashes=False)
+def unauthorized():
+    """Raises a 401 error to test custom handler"""
+    abort(401)
